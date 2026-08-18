@@ -17,7 +17,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           to="/"
           className="text-2xl font-bold tracking-[0.25em]"
         >
-          LUXE<span className="font-light">WOMEN</span>
+          LUXE<span className="font-light">MEN</span>
         </Link>
 
         {/* NAV LINKS */}
