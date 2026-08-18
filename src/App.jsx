@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -21,11 +22,13 @@ function App() {
             : "min-h-screen bg-white text-zinc-900"
         }
       >
+        {/* Navbar */}
         <Navbar
           darkMode={darkMode}
           setDarkMode={setDarkMode}
         />
 
+        {/* Pages / Routes */}
         <Routes>
           <Route
             path="/"
@@ -52,6 +55,9 @@ function App() {
             element={<Contact darkMode={darkMode} />}
           />
         </Routes>
+
+        {/* Footer */}
+        <Footer darkMode={darkMode} />
       </div>
     </BrowserRouter>
   );
