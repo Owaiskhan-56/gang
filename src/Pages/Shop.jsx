@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const products = [
   {
     id: 1,
-    name: "Classic Black Suit",
+    name: "Classic BLUE Suit",
     price: 8999,
     oldPrice: 10999,
     rating: "4.9",
