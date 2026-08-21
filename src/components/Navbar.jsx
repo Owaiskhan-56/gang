@@ -1,227 +1,301 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import {
+  Search,
+  Heart,
+  ShoppingBag,
+  Moon,
+  Sun,
+  Menu,
+  X,
+  UserRound,
+} from "lucide-react";
 
-const Navbar = ({ darkMode, setDarkMode, cartCount = 0 }) => {
+const Navbar = ({ darkMode, setDarkMode }) => {
   const [mobileMenu, setMobileMenu] = useState(false);
-
-  const location = useLocation();
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const navLinks = [
-    {
-      name: "Home",
-      path: "/",
-    },
-    {
-      name: "Shop",
-      path: "/shop",
-    },
-    {
-      name: "New Arrivals",
-      path: "/new-arrivals",
-    },
-    {
-      name: "Sale",
-      path: "/sale",
-      sale: true,
-    },
-    {
-      name: "Contact",
-      path: "/contact",
-    },
+    { name: "Home", path: "/" },
+    { name: "Shop", path: "/shop" },
+    { name: "New Arrivals", path: "/new-arrivals" },
+    { name: "Sale", path: "/sale" },
+    { name: "Contact", path: "/contact" },
   ];
 
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
-
   return (
-    <nav
-      className={`sticky top-0 z-50 border-b backdrop-blur-md ${
+    <header
+      className={`sticky top-0 z-50 border-b backdrop-blur-xl transition-all duration-300 ${
         darkMode
           ? "border-zinc-800 bg-zinc-950/95 text-white"
           : "border-gray-200 bg-white/95 text-zinc-900"
       }`}
     >
-      {/* ================= NAVBAR ================= */}
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+      {/* Top Announcement Bar */}
+      <div
+        className={`hidden text-center text-[11px] font-medium tracking-[0.2em] sm:block ${
+          darkMode
+            ? "bg-white text-black"
+            : "bg-zinc-950 text-white"
+        }`}
+      >
+        FREE SHIPPING ON ORDERS OVER RS. 10,000
+      </div>
 
-        {/* ================= LOGO ================= */}
-        <Link
+      {/* Main Navbar */}
+      <nav className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 md:px-8">
+
+        {/* LOGO */}
+        <NavLink
           to="/"
-          onClick={() => setMobileMenu(false)}
-          className="text-2xl font-bold tracking-[0.25em]"
+          className="group flex items-center"
         >
-          LUXE
-          <span className="font-light">MEN</span>
-        </Link>
+          <div className="leading-none">
+            <h1 className="text-[24px] font-semibold tracking-[0.32em]">
+              LUXE
+              <span className="font-light">MEN</span>
+            </h1>
 
-        {/* ================= DESKTOP NAV ================= */}
-        <div className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`relative py-2 text-sm font-medium transition ${
-                isActive(link.path)
-                  ? "font-bold"
-                  : "hover:text-gray-500"
+            <p
+              className={`mt-1 text-[8px] tracking-[0.42em] transition ${
+                darkMode ? "text-zinc-400" : "text-zinc-500"
               }`}
             >
-              {link.name}
+              MEN'S LUXURY WEAR
+            </p>
+          </div>
+        </NavLink>
 
-              {/* ACTIVE LINE */}
-              {isActive(link.path) && (
-                <span
-                  className={`absolute bottom-0 left-0 h-[2px] w-full ${
-                    darkMode ? "bg-white" : "bg-black"
-                  }`}
-                />
-              )}
+        {/* DESKTOP NAVIGATION */}
+        <div className="hidden items-center gap-8 lg:flex">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.name}
+              to={link.path}
+              className={({ isActive }) =>
+                `relative py-7 text-[14px] font-medium transition-all duration-300 ${
+                  isActive
+                    ? darkMode
+                      ? "text-white"
+                      : "text-black"
+                    : darkMode
+                    ? "text-zinc-400 hover:text-white"
+                    : "text-zinc-600 hover:text-black"
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  {link.name}
 
-              {/* SALE DOT */}
-              {link.sale && (
-                <span className="absolute -right-3 -top-1 h-2 w-2 rounded-full bg-red-500" />
+                  {/* Active underline */}
+                  <span
+                    className={`absolute bottom-0 left-1/2 h-[2px] -translate-x-1/2 transition-all duration-300 ${
+                      isActive
+                        ? "w-full bg-red-500"
+                        : "w-0 bg-red-500"
+                    }`}
+                  />
+
+                  {/* Sale dot */}
+                  {link.name === "Sale" && (
+                    <span className="absolute -right-2 -top-1 h-1.5 w-1.5 rounded-full bg-red-500" />
+                  )}
+                </>
               )}
-            </Link>
+            </NavLink>
           ))}
         </div>
 
-        {/* ================= RIGHT SIDE ================= */}
+        {/* RIGHT SIDE */}
         <div className="flex items-center gap-2">
 
           {/* SEARCH */}
-          <Link
-            to="/shop"
-            title="Search"
-            className={`flex h-10 w-10 items-center justify-center rounded-full border text-lg transition hover:scale-105 ${
-              darkMode
-                ? "border-zinc-700 hover:bg-zinc-800"
-                : "border-gray-300 hover:bg-gray-100"
-            }`}
-          >
-            ⌕
-          </Link>
-
-          {/* CART */}
-          <Link
-            to="/cart"
-            title="Shopping Bag"
-            className={`relative flex h-10 w-10 items-center justify-center rounded-full border text-lg transition hover:scale-105 ${
-              darkMode
-                ? "border-zinc-700 hover:bg-zinc-800"
-                : "border-gray-300 hover:bg-gray-100"
-            }`}
-          >
-            🛍
-
-            {/* CART COUNT */}
-            {cartCount > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-black px-1 text-[10px] font-bold text-white">
-                {cartCount > 99 ? "99+" : cartCount}
-              </span>
+          <div className="relative hidden sm:block">
+            {searchOpen && (
+              <input
+                autoFocus
+                type="text"
+                placeholder="Search products..."
+                className={`absolute right-12 top-1/2 w-52 -translate-y-1/2 rounded-full border px-4 py-2 text-sm outline-none transition-all ${
+                  darkMode
+                    ? "border-zinc-700 bg-zinc-900 text-white placeholder:text-zinc-500"
+                    : "border-gray-200 bg-white text-black placeholder:text-gray-400"
+                }`}
+              />
             )}
-          </Link>
+
+            <button
+              onClick={() => setSearchOpen(!searchOpen)}
+              className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 hover:scale-105 ${
+                darkMode
+                  ? "border-zinc-700 hover:bg-zinc-800"
+                  : "border-gray-200 hover:bg-gray-100"
+              }`}
+              aria-label="Search"
+            >
+              <Search size={17} strokeWidth={1.8} />
+            </button>
+          </div>
+
+          {/* USER */}
+          <button
+            className={`hidden h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 hover:scale-105 sm:flex ${
+              darkMode
+                ? "border-zinc-700 hover:bg-zinc-800"
+                : "border-gray-200 hover:bg-gray-100"
+            }`}
+            aria-label="Account"
+          >
+            <UserRound size={17} strokeWidth={1.8} />
+          </button>
+
+          {/* WISHLIST */}
+          <button
+            className={`relative hidden h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 hover:scale-105 sm:flex ${
+              darkMode
+                ? "border-zinc-700 hover:bg-zinc-800"
+                : "border-gray-200 hover:bg-gray-100"
+            }`}
+            aria-label="Wishlist"
+          >
+            <Heart size={17} strokeWidth={1.8} />
+
+            <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white">
+              2
+            </span>
+          </button>
+
+          {/* SHOPPING BAG */}
+          <button
+            className={`relative flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 hover:scale-105 ${
+              darkMode
+                ? "border-zinc-700 hover:bg-zinc-800"
+                : "border-gray-200 hover:bg-gray-100"
+            }`}
+            aria-label="Shopping bag"
+          >
+            <ShoppingBag size={17} strokeWidth={1.8} />
+
+            <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white">
+              3
+            </span>
+          </button>
 
           {/* DARK MODE */}
           <button
             onClick={() => setDarkMode(!darkMode)}
-            title={
-              darkMode
-                ? "Switch to light mode"
-                : "Switch to dark mode"
-            }
-            className={`flex h-10 w-10 items-center justify-center rounded-full text-lg transition hover:scale-105 ${
+            className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:scale-105 ${
               darkMode
                 ? "bg-white text-black"
                 : "bg-black text-white"
             }`}
+            aria-label="Toggle theme"
           >
-            {darkMode ? "☀" : "☾"}
+            {darkMode ? (
+              <Sun size={17} strokeWidth={1.8} />
+            ) : (
+              <Moon size={17} strokeWidth={1.8} />
+            )}
           </button>
 
           {/* MOBILE MENU */}
           <button
             onClick={() => setMobileMenu(!mobileMenu)}
-            aria-label="Toggle menu"
-            className={`ml-1 flex h-10 w-10 items-center justify-center rounded-full border text-lg md:hidden ${
+            className={`ml-1 flex h-10 w-10 items-center justify-center rounded-full border lg:hidden ${
               darkMode
-                ? "border-zinc-700 hover:bg-zinc-800"
-                : "border-gray-300 hover:bg-gray-100"
+                ? "border-zinc-700"
+                : "border-gray-200"
             }`}
+            aria-label="Menu"
           >
-            {mobileMenu ? "✕" : "☰"}
+            {mobileMenu ? (
+              <X size={19} />
+            ) : (
+              <Menu size={19} />
+            )}
           </button>
-
         </div>
-      </div>
+      </nav>
 
-      {/* ================= MOBILE MENU ================= */}
-      {mobileMenu && (
+      {/* MOBILE NAVIGATION */}
+      <div
+        className={`overflow-hidden transition-all duration-300 lg:hidden ${
+          mobileMenu ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
         <div
-          className={`border-t px-6 py-6 md:hidden ${
+          className={`border-t px-6 py-5 ${
             darkMode
               ? "border-zinc-800 bg-zinc-950"
-              : "border-gray-200 bg-white"
+              : "border-gray-100 bg-white"
           }`}
         >
-          <div className="flex flex-col gap-2">
+          {/* Mobile Search */}
+          <div className="relative mb-5">
+            <Search
+              size={17}
+              className={`absolute left-4 top-1/2 -translate-y-1/2 ${
+                darkMode ? "text-zinc-500" : "text-gray-400"
+              }`}
+            />
 
+            <input
+              type="text"
+              placeholder="Search men's clothing..."
+              className={`w-full rounded-full border py-3 pl-11 pr-4 text-sm outline-none ${
+                darkMode
+                  ? "border-zinc-700 bg-zinc-900 text-white"
+                  : "border-gray-200 bg-gray-50 text-black"
+              }`}
+            />
+          </div>
+
+          {/* Mobile Links */}
+          <div className="space-y-1">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
+              <NavLink
+                key={link.name}
                 to={link.path}
                 onClick={() => setMobileMenu(false)}
-                className={`rounded-xl px-4 py-3 font-medium transition ${
-                  isActive(link.path)
-                    ? darkMode
-                      ? "bg-zinc-800 text-white"
-                      : "bg-gray-100 text-black"
-                    : darkMode
-                      ? "hover:bg-zinc-800"
-                      : "hover:bg-gray-100"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-
-                  <span>{link.name}</span>
-
-                  {link.sale && (
-                    <span className="rounded-full bg-red-500 px-2 py-1 text-[10px] font-bold text-white">
-                      SALE
-                    </span>
-                  )}
-
-                </div>
-              </Link>
-            ))}
-
-            {/* MOBILE CART */}
-            <Link
-              to="/cart"
-              onClick={() => setMobileMenu(false)}
-              className={`mt-2 flex items-center justify-between rounded-xl px-4 py-3 font-medium ${
-                darkMode
-                  ? "bg-zinc-800"
-                  : "bg-gray-100"
-              }`}
-            >
-              <span>🛍 Shopping Bag</span>
-
-              <span
-                className={
-                  darkMode
-                    ? "text-gray-400"
-                    : "text-gray-500"
+                className={({ isActive }) =>
+                  `flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium transition ${
+                    isActive
+                      ? darkMode
+                        ? "bg-white text-black"
+                        : "bg-black text-white"
+                      : darkMode
+                      ? "text-zinc-300 hover:bg-zinc-900"
+                      : "text-zinc-700 hover:bg-gray-100"
+                  }`
                 }
               >
-                ({cartCount})
-              </span>
-            </Link>
+                {link.name}
 
+                {link.name === "Sale" && (
+                  <span className="rounded-full bg-red-500 px-2 py-0.5 text-[9px] font-bold text-white">
+                    SALE
+                  </span>
+                )}
+              </NavLink>
+            ))}
+          </div>
+
+          {/* Mobile Account */}
+          <div className="mt-4 flex gap-2 border-t pt-4 dark:border-zinc-800">
+            <button className="flex flex-1 items-center justify-center gap-2 rounded-lg border py-3 text-sm">
+              <UserRound size={16} />
+              Account
+            </button>
+
+            <button className="flex flex-1 items-center justify-center gap-2 rounded-lg border py-3 text-sm">
+              <Heart size={16} />
+              Wishlist
+            </button>
           </div>
         </div>
-      )}
-    </nav>
+      </div>
+    </header>
   );
 };
 
