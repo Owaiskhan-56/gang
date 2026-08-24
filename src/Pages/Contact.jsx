@@ -1,30 +1,63 @@
 import React, { useState } from "react";
+import shahzaib from "../assets/shahzaib.png";
 
 const Contact = ({ darkMode }) => {
   const [submitted, setSubmitted] = useState(false);
-  const [message, setMessage] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [subject, setSubject] = useState("");
-  const [orderNumber, setOrderNumber] = useState("");
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+    orderNumber: "",
+  });
+
   const [newsletterEmail, setNewsletterEmail] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "message" && value.length > 500) return;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     setSubmitted(true);
 
-    setName("");
-    setEmail("");
-    setPhone("");
-    setSubject("");
-    setMessage("");
-    setOrderNumber("");
+    setForm({
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+      orderNumber: "",
+    });
 
     setTimeout(() => {
       setSubmitted(false);
     }, 5000);
+  };
+
+  const handleTrackOrder = (e) => {
+    e.preventDefault();
+
+    if (!form.orderNumber.trim()) return;
+
+    alert(
+      `Order ${form.orderNumber} received. Our support team will help you track it.`
+    );
+
+    setForm((prev) => ({
+      ...prev,
+      orderNumber: "",
+    }));
   };
 
   const handleNewsletter = (e) => {
@@ -36,7 +69,7 @@ const Contact = ({ darkMode }) => {
     setNewsletterEmail("");
   };
 
-  const inputStyle = `w-full rounded-xl border px-5 py-4 outline-none transition focus:ring-2 focus:ring-black ${
+  const inputStyle = `w-full rounded-2xl border px-5 py-4 outline-none transition focus:ring-2 focus:ring-black ${
     darkMode
       ? "border-zinc-700 bg-zinc-950 text-white placeholder:text-zinc-500"
       : "border-gray-300 bg-white text-zinc-900 placeholder:text-gray-400"
@@ -125,7 +158,7 @@ const Contact = ({ darkMode }) => {
     {
       question: "How can I track my order?",
       answer:
-        "Contact our support team with your order number and we will help you check your order status.",
+        "Enter your order number in the order support section or contact our support team.",
     },
     {
       question: "Do you offer Cash on Delivery?",
@@ -135,7 +168,7 @@ const Contact = ({ darkMode }) => {
     {
       question: "How do I choose the right size?",
       answer:
-        "Check the size information available with the product. If you are still unsure, contact our team for assistance.",
+        "Check the size information available with the product. If you are still unsure, contact our team.",
     },
     {
       question: "How can I contact LUXEWEAR?",
@@ -146,7 +179,7 @@ const Contact = ({ darkMode }) => {
 
   return (
     <main
-      className={`min-h-screen ${
+      className={`min-h-screen transition-colors duration-300 ${
         darkMode
           ? "bg-zinc-950 text-white"
           : "bg-white text-zinc-900"
@@ -162,7 +195,7 @@ const Contact = ({ darkMode }) => {
         }`}
       >
         <div className="mx-auto max-w-6xl text-center">
-          <p className="text-sm tracking-[0.4em] text-gray-500">
+          <p className="text-sm font-semibold tracking-[0.4em] text-gray-500">
             CONTACT LUXEWEAR
           </p>
 
@@ -181,7 +214,7 @@ const Contact = ({ darkMode }) => {
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <a
               href="mailto:support@luxewear.com"
-              className="rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:scale-105"
+              className="rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:-translate-y-1 hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
             >
               Email Us →
             </a>
@@ -190,7 +223,7 @@ const Contact = ({ darkMode }) => {
               href="https://wa.me/923001234567"
               target="_blank"
               rel="noreferrer"
-              className={`rounded-full border px-8 py-4 font-semibold transition hover:scale-105 ${
+              className={`rounded-full border px-8 py-4 font-semibold transition hover:-translate-y-1 ${
                 darkMode
                   ? "border-zinc-700 hover:bg-zinc-800"
                   : "border-zinc-300 hover:bg-white"
@@ -217,7 +250,11 @@ const Contact = ({ darkMode }) => {
                   : "border-gray-200 bg-white"
               }`}
             >
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-zinc-100 text-3xl transition group-hover:scale-110">
+              <div
+                className={`mx-auto flex h-16 w-16 items-center justify-center rounded-full text-3xl transition group-hover:scale-110 ${
+                  darkMode ? "bg-zinc-800" : "bg-zinc-100"
+                }`}
+              >
                 {card.icon}
               </div>
 
@@ -251,6 +288,138 @@ const Contact = ({ darkMode }) => {
               </a>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* =====================================================
+          OWNER / FOUNDER SECTION
+      ====================================================== */}
+
+      <section className="px-6 py-24">
+        <div
+          className={`mx-auto max-w-6xl overflow-hidden rounded-[40px] border ${
+            darkMode
+              ? "border-zinc-800 bg-zinc-900"
+              : "border-gray-200 bg-zinc-50"
+          }`}
+        >
+          <div className="grid items-center md:grid-cols-2">
+            {/* OWNER IMAGE */}
+
+            <div className="relative flex min-h-[520px] items-center justify-center overflow-hidden p-8 md:p-12">
+              <div
+                className={`absolute inset-0 ${
+                  darkMode
+                    ? "bg-gradient-to-br from-zinc-800 to-zinc-950"
+                    : "bg-gradient-to-br from-zinc-200 to-white"
+                }`}
+              />
+
+              <div className="relative">
+                <div
+                  className={`absolute -inset-4 rounded-[35px] border ${
+                    darkMode
+                      ? "border-zinc-700"
+                      : "border-zinc-300"
+                  }`}
+                />
+
+                <img
+                  src={shahzaib}
+                  alt="Shahzaib - Founder and Owner of LUXEWEAR"
+                  className="relative h-[420px] w-[320px] rounded-[30px] object-cover object-center shadow-2xl transition duration-500 hover:scale-[1.02]"
+                />
+
+                <div
+                  className={`absolute bottom-5 left-5 right-5 rounded-2xl px-5 py-4 backdrop-blur-md ${
+                    darkMode
+                      ? "bg-black/70 text-white"
+                      : "bg-white/90 text-zinc-900"
+                  }`}
+                >
+                  <p className="text-xs font-semibold tracking-[0.25em] text-gray-500">
+                    FOUNDER
+                  </p>
+
+                  <p className="mt-1 text-lg font-bold">
+                    Shahzaib
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* OWNER CONTENT */}
+
+            <div className="px-8 py-14 md:px-14">
+              <p className="text-sm font-semibold tracking-[0.3em] text-gray-500">
+                MEET THE OWNER
+              </p>
+
+              <h2 className="mt-5 text-5xl font-bold md:text-6xl">
+                Shahzaib
+              </h2>
+
+              <p className="mt-3 text-lg font-medium text-gray-500">
+                Founder & Owner of LUXEWEAR
+              </p>
+
+              <div
+                className={`mt-7 h-px w-20 ${
+                  darkMode ? "bg-white" : "bg-black"
+                }`}
+              />
+
+              <p className="mt-7 text-lg leading-8 text-gray-500">
+                Welcome to LUXEWEAR. I created this website
+                with a passion for modern men's fashion, premium
+                style and a better online shopping experience.
+              </p>
+
+              <p className="mt-5 leading-8 text-gray-500">
+                My goal is to build a stylish and trusted fashion
+                store where customers can discover quality
+                clothing, explore new collections and enjoy a
+                simple shopping experience.
+              </p>
+
+              <div className="mt-8 grid grid-cols-2 gap-4">
+                <div
+                  className={`rounded-2xl p-5 ${
+                    darkMode ? "bg-zinc-800" : "bg-white"
+                  }`}
+                >
+                  <p className="text-2xl font-bold">
+                    LUXEWEAR
+                  </p>
+
+                  <p className="mt-1 text-sm text-gray-500">
+                    Fashion Brand
+                  </p>
+                </div>
+
+                <div
+                  className={`rounded-2xl p-5 ${
+                    darkMode ? "bg-zinc-800" : "bg-white"
+                  }`}
+                >
+                  <p className="text-2xl font-bold">
+                    Premium
+                  </p>
+
+                  <p className="mt-1 text-sm text-gray-500">
+                    Men's Style
+                  </p>
+                </div>
+              </div>
+
+              <a
+                href="mailto:support@luxewear.com"
+                className="mt-8 inline-block rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:-translate-y-1 hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
+              >
+                Contact the Owner →
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -303,10 +472,10 @@ const Contact = ({ darkMode }) => {
             {services.map((service) => (
               <div
                 key={service.title}
-                className={`rounded-3xl border p-7 transition duration-300 hover:-translate-y-2 ${
+                className={`rounded-3xl border p-7 transition duration-300 hover:-translate-y-2 hover:shadow-xl ${
                   darkMode
                     ? "border-zinc-800 bg-zinc-900"
-                    : "border-gray-200 bg-white shadow-sm"
+                    : "border-gray-200 bg-white"
                 }`}
               >
                 <div className="text-4xl">
@@ -336,7 +505,7 @@ const Contact = ({ darkMode }) => {
         }`}
       >
         <div className="mx-auto max-w-5xl">
-          <div className="rounded-[30px] bg-black px-8 py-12 text-white md:px-14">
+          <div className="rounded-[35px] bg-black px-8 py-12 text-white md:px-14">
             <div className="grid items-center gap-10 md:grid-cols-2">
               <div>
                 <p className="text-sm tracking-[0.3em] text-zinc-400">
@@ -353,40 +522,27 @@ const Contact = ({ darkMode }) => {
                 </p>
               </div>
 
-              <div>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
+              <form
+                onSubmit={handleTrackOrder}
+                className="flex flex-col gap-3"
+              >
+                <input
+                  type="text"
+                  name="orderNumber"
+                  value={form.orderNumber}
+                  onChange={handleChange}
+                  placeholder="Enter order number"
+                  className="rounded-full border border-zinc-700 bg-zinc-900 px-6 py-4 text-white outline-none placeholder:text-zinc-500 focus:border-white"
+                  required
+                />
 
-                    if (!orderNumber) return;
-
-                    alert(
-                      `Order ${orderNumber} received. Our support team will help you track it.`
-                    );
-
-                    setOrderNumber("");
-                  }}
-                  className="flex flex-col gap-3"
+                <button
+                  type="submit"
+                  className="rounded-full bg-white px-6 py-4 font-semibold text-black transition hover:scale-[1.02]"
                 >
-                  <input
-                    type="text"
-                    value={orderNumber}
-                    onChange={(e) =>
-                      setOrderNumber(e.target.value)
-                    }
-                    placeholder="Enter order number"
-                    className="rounded-full border border-zinc-700 bg-zinc-900 px-6 py-4 text-white outline-none placeholder:text-zinc-500 focus:border-white"
-                    required
-                  />
-
-                  <button
-                    type="submit"
-                    className="rounded-full bg-white px-6 py-4 font-semibold text-black transition hover:scale-[1.02]"
-                  >
-                    Track Order →
-                  </button>
-                </form>
-              </div>
+                  Track Order →
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -398,7 +554,7 @@ const Contact = ({ darkMode }) => {
 
       <section className="px-6 py-24">
         <div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-2">
-          {/* LEFT */}
+          {/* LEFT SIDE */}
 
           <div>
             <p className="text-sm tracking-[0.3em] text-gray-500">
@@ -410,16 +566,14 @@ const Contact = ({ darkMode }) => {
             </h2>
 
             <p className="mt-6 max-w-lg text-lg leading-8 text-gray-500">
-              Whether you need help choosing the perfect
-              outfit, tracking your order or requesting an
-              exchange, send us a message.
+              Whether you need help choosing the perfect outfit,
+              tracking your order or requesting an exchange,
+              send us a message.
             </p>
 
             <div
               className={`mt-10 rounded-3xl p-8 ${
-                darkMode
-                  ? "bg-zinc-900"
-                  : "bg-zinc-100"
+                darkMode ? "bg-zinc-900" : "bg-zinc-100"
               }`}
             >
               <div className="flex items-start gap-5">
@@ -439,7 +593,7 @@ const Contact = ({ darkMode }) => {
                     href="https://wa.me/923001234567"
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-5 inline-block rounded-full bg-black px-6 py-3 font-semibold text-white transition hover:scale-105"
+                    className="mt-5 inline-block rounded-full bg-black px-6 py-3 font-semibold text-white transition hover:scale-105 dark:bg-white dark:text-black"
                   >
                     WhatsApp Us →
                   </a>
@@ -463,8 +617,6 @@ const Contact = ({ darkMode }) => {
                 assist you faster.
               </p>
             </div>
-
-            {/* ADDRESS */}
 
             <div
               className={`mt-5 rounded-3xl border p-8 ${
@@ -505,7 +657,7 @@ const Contact = ({ darkMode }) => {
             }`}
           >
             {submitted && (
-              <div className="mb-6 rounded-xl bg-green-100 px-5 py-4 font-medium text-green-800">
+              <div className="mb-6 rounded-2xl bg-green-100 px-5 py-4 font-medium text-green-800">
                 ✓ Your message has been sent successfully!
                 <br />
                 <span className="text-sm">
@@ -514,10 +666,7 @@ const Contact = ({ darkMode }) => {
               </div>
             )}
 
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6"
-            >
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="mb-2 block text-sm font-semibold">
                   Your Name
@@ -525,8 +674,9 @@ const Contact = ({ darkMode }) => {
 
                 <input
                   type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
                   placeholder="Enter your name"
                   required
                   className={inputStyle}
@@ -540,8 +690,9 @@ const Contact = ({ darkMode }) => {
 
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
                   placeholder="you@example.com"
                   required
                   className={inputStyle}
@@ -555,8 +706,9 @@ const Contact = ({ darkMode }) => {
 
                 <input
                   type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleChange}
                   placeholder="+92 300 1234567"
                   className={inputStyle}
                 />
@@ -568,38 +720,21 @@ const Contact = ({ darkMode }) => {
                 </label>
 
                 <select
-                  value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
+                  name="subject"
+                  value={form.subject}
+                  onChange={handleChange}
                   required
                   className={inputStyle}
                 >
-                  <option value="">
-                    Select a subject
-                  </option>
-
-                  <option value="order">
-                    Order Question
-                  </option>
-
-                  <option value="product">
-                    Product Question
-                  </option>
-
-                  <option value="delivery">
-                    Delivery
-                  </option>
-
+                  <option value="">Select a subject</option>
+                  <option value="order">Order Question</option>
+                  <option value="product">Product Question</option>
+                  <option value="delivery">Delivery</option>
                   <option value="return">
                     Return / Exchange
                   </option>
-
-                  <option value="payment">
-                    Payment
-                  </option>
-
-                  <option value="other">
-                    Other
-                  </option>
+                  <option value="payment">Payment</option>
+                  <option value="other">Other</option>
                 </select>
               </div>
 
@@ -610,17 +745,14 @@ const Contact = ({ darkMode }) => {
                   </label>
 
                   <span className="text-xs text-gray-500">
-                    {message.length}/500
+                    {form.message.length}/500
                   </span>
                 </div>
 
                 <textarea
-                  value={message}
-                  onChange={(e) => {
-                    if (e.target.value.length <= 500) {
-                      setMessage(e.target.value);
-                    }
-                  }}
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
                   placeholder="Write your message..."
                   required
                   rows="6"
@@ -643,7 +775,7 @@ const Contact = ({ darkMode }) => {
 
               <button
                 type="submit"
-                className="w-full rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:scale-[1.02] hover:bg-zinc-800"
+                className="w-full rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:scale-[1.02] hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
               >
                 Send Message →
               </button>
@@ -658,9 +790,7 @@ const Contact = ({ darkMode }) => {
 
       <section
         className={`px-6 py-24 ${
-          darkMode
-            ? "bg-zinc-900"
-            : "bg-zinc-100"
+          darkMode ? "bg-zinc-900" : "bg-zinc-100"
         }`}
       >
         <div className="mx-auto max-w-4xl">
@@ -684,9 +814,7 @@ const Contact = ({ darkMode }) => {
               <details
                 key={faq.question}
                 className={`group rounded-2xl p-6 ${
-                  darkMode
-                    ? "bg-zinc-950"
-                    : "bg-white"
+                  darkMode ? "bg-zinc-950" : "bg-white"
                 }`}
               >
                 <summary className="cursor-pointer list-none font-semibold">
@@ -714,10 +842,8 @@ const Contact = ({ darkMode }) => {
 
       <section className="px-6 py-24">
         <div
-          className={`mx-auto max-w-6xl rounded-[30px] px-8 py-16 text-center md:px-16 ${
-            darkMode
-              ? "bg-zinc-900"
-              : "bg-zinc-200"
+          className={`mx-auto max-w-6xl rounded-[35px] px-8 py-16 text-center md:px-16 ${
+            darkMode ? "bg-zinc-900" : "bg-zinc-200"
           }`}
         >
           <p className="text-sm tracking-[0.3em] text-gray-500">
@@ -747,14 +873,14 @@ const Contact = ({ darkMode }) => {
               required
               className={`flex-1 rounded-full border px-6 py-4 outline-none ${
                 darkMode
-                  ? "border-zinc-700 bg-zinc-950 text-white"
+                  ? "border-zinc-700 bg-zinc-950 text-white placeholder:text-zinc-500"
                   : "border-gray-300 bg-white"
               }`}
             />
 
             <button
               type="submit"
-              className="rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:scale-105"
+              className="rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:scale-105 dark:bg-white dark:text-black"
             >
               Subscribe
             </button>
@@ -806,7 +932,7 @@ const Contact = ({ darkMode }) => {
       ====================================================== */}
 
       <section className="px-6 pb-24">
-        <div className="mx-auto max-w-5xl rounded-[30px] bg-black px-8 py-16 text-center text-white md:px-20">
+        <div className="mx-auto max-w-5xl rounded-[35px] bg-black px-8 py-16 text-center text-white md:px-20">
           <p className="text-sm tracking-[0.3em] text-zinc-400">
             LUXEWEAR SUPPORT
           </p>
