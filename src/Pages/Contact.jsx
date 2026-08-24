@@ -1,976 +1,303 @@
-import React, { useState } from "react";
-import shahzaib from "../assets/shahzaib.png";
+{/* =====================================================
+    WEBSITE OWNER / FOUNDER
+====================================================== */}
 
-const Contact = ({ darkMode }) => {
-  const [submitted, setSubmitted] = useState(false);
+<section className="px-4 py-20 sm:px-6 lg:py-28">
+  <div
+    className={`mx-auto max-w-7xl overflow-hidden rounded-[32px] border shadow-xl md:rounded-[40px] ${
+      darkMode
+        ? "border-zinc-800 bg-zinc-950"
+        : "border-zinc-200 bg-white"
+    }`}
+  >
+    <div className="grid lg:grid-cols-2">
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-    orderNumber: "",
-  });
+      {/* =================================================
+          FOUNDER IMAGE
+      ================================================== */}
 
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    if (name === "message" && value.length > 500) return;
-
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    setSubmitted(true);
-
-    setForm({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-      orderNumber: "",
-    });
-
-    setTimeout(() => {
-      setSubmitted(false);
-    }, 5000);
-  };
-
-  const handleTrackOrder = (e) => {
-    e.preventDefault();
-
-    if (!form.orderNumber.trim()) return;
-
-    alert(
-      `Order ${form.orderNumber} received. Our support team will help you track it.`
-    );
-
-    setForm((prev) => ({
-      ...prev,
-      orderNumber: "",
-    }));
-  };
-
-  const handleNewsletter = (e) => {
-    e.preventDefault();
-
-    if (!newsletterEmail) return;
-
-    alert("Thank you for subscribing to LUXEWEAR!");
-    setNewsletterEmail("");
-  };
-
-  const inputStyle = `w-full rounded-2xl border px-5 py-4 outline-none transition focus:ring-2 focus:ring-black ${
-    darkMode
-      ? "border-zinc-700 bg-zinc-950 text-white placeholder:text-zinc-500"
-      : "border-gray-300 bg-white text-zinc-900 placeholder:text-gray-400"
-  }`;
-
-  const contactCards = [
-    {
-      icon: "✉️",
-      title: "Email Us",
-      description: "Get help from our support team.",
-      value: "support@luxewear.com",
-      action: "Send Email →",
-      href: "mailto:support@luxewear.com",
-    },
-    {
-      icon: "📞",
-      title: "Call Us",
-      description: "Talk directly with our team.",
-      value: "+92 300 1234567",
-      action: "Call Now →",
-      href: "tel:+923001234567",
-    },
-    {
-      icon: "💬",
-      title: "WhatsApp",
-      description: "Chat with our support team.",
-      value: "Available 10 AM - 8 PM",
-      action: "Chat Now →",
-      href: "https://wa.me/923001234567",
-    },
-  ];
-
-  const services = [
-    {
-      icon: "📦",
-      title: "Order Support",
-      text: "Need help with an existing order? Our team can help you check your order status.",
-    },
-    {
-      icon: "👕",
-      title: "Product Advice",
-      text: "Not sure about your size, fit or style? Ask our team for personalized guidance.",
-    },
-    {
-      icon: "↩️",
-      title: "Returns & Exchange",
-      text: "Questions about returns or exchanges? We will guide you through the process.",
-    },
-    {
-      icon: "🚚",
-      title: "Delivery Help",
-      text: "Need an update about your delivery? Send us your order details.",
-    },
-  ];
-
-  const stats = [
-    {
-      number: "24h",
-      label: "Average Response",
-    },
-    {
-      number: "98%",
-      label: "Customer Satisfaction",
-    },
-    {
-      number: "10K+",
-      label: "Customers Helped",
-    },
-    {
-      number: "7 Days",
-      label: "Support Available",
-    },
-  ];
-
-  const faqs = [
-    {
-      question: "How long does delivery take?",
-      answer:
-        "Orders are normally delivered within 3–5 business days depending on your location.",
-    },
-    {
-      question: "Can I return or exchange my order?",
-      answer:
-        "Yes. Eligible products can be returned or exchanged according to our return policy.",
-    },
-    {
-      question: "How can I track my order?",
-      answer:
-        "Enter your order number in the order support section or contact our support team.",
-    },
-    {
-      question: "Do you offer Cash on Delivery?",
-      answer:
-        "Cash on Delivery may be available depending on your location and order.",
-    },
-    {
-      question: "How do I choose the right size?",
-      answer:
-        "Check the size information available with the product. If you are still unsure, contact our team.",
-    },
-    {
-      question: "How can I contact LUXEWEAR?",
-      answer:
-        "You can contact us through email, phone, WhatsApp or the contact form on this page.",
-    },
-  ];
-
-  return (
-    <main
-      className={`min-h-screen transition-colors duration-300 ${
-        darkMode
-          ? "bg-zinc-950 text-white"
-          : "bg-white text-zinc-900"
-      }`}
-    >
-      {/* =====================================================
-          HERO
-      ====================================================== */}
-
-      <section
-        className={`relative overflow-hidden px-6 py-24 md:py-32 ${
+      <div
+        className={`relative flex min-h-[620px] items-center justify-center overflow-hidden p-8 sm:p-12 lg:p-16 ${
           darkMode ? "bg-zinc-900" : "bg-zinc-100"
         }`}
       >
-        <div className="mx-auto max-w-6xl text-center">
-          <p className="text-sm font-semibold tracking-[0.4em] text-gray-500">
-            CONTACT LUXEWEAR
-          </p>
+        {/* Decorative circles */}
 
-          <h1 className="mt-5 text-6xl font-bold leading-none md:text-8xl">
-            Get In
-            <br />
-            <span className="font-light italic">Touch.</span>
-          </h1>
-
-          <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-gray-500">
-            Have a question about your order, product, delivery,
-            return or anything else? Our support team is ready
-            to help you.
-          </p>
-
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <a
-              href="mailto:support@luxewear.com"
-              className="rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:-translate-y-1 hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
-            >
-              Email Us →
-            </a>
-
-            <a
-              href="https://wa.me/923001234567"
-              target="_blank"
-              rel="noreferrer"
-              className={`rounded-full border px-8 py-4 font-semibold transition hover:-translate-y-1 ${
-                darkMode
-                  ? "border-zinc-700 hover:bg-zinc-800"
-                  : "border-zinc-300 hover:bg-white"
-              }`}
-            >
-              WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          CONTACT CARDS
-      ====================================================== */}
-
-      <section className="px-6 py-20">
-        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
-          {contactCards.map((card) => (
-            <div
-              key={card.title}
-              className={`group rounded-3xl border p-8 text-center transition duration-300 hover:-translate-y-2 hover:shadow-xl ${
-                darkMode
-                  ? "border-zinc-800 bg-zinc-900"
-                  : "border-gray-200 bg-white"
-              }`}
-            >
-              <div
-                className={`mx-auto flex h-16 w-16 items-center justify-center rounded-full text-3xl transition group-hover:scale-110 ${
-                  darkMode ? "bg-zinc-800" : "bg-zinc-100"
-                }`}
-              >
-                {card.icon}
-              </div>
-
-              <h3 className="mt-6 text-xl font-bold">
-                {card.title}
-              </h3>
-
-              <p className="mt-3 text-gray-500">
-                {card.description}
-              </p>
-
-              <p className="mt-4 font-medium">
-                {card.value}
-              </p>
-
-              <a
-                href={card.href}
-                target={
-                  card.href.startsWith("https")
-                    ? "_blank"
-                    : undefined
-                }
-                rel={
-                  card.href.startsWith("https")
-                    ? "noreferrer"
-                    : undefined
-                }
-                className="mt-5 inline-block font-semibold underline underline-offset-4"
-              >
-                {card.action}
-              </a>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* =====================================================
-          OWNER / FOUNDER SECTION
-      ====================================================== */}
-
-      <section className="px-6 py-24">
         <div
-          className={`mx-auto max-w-6xl overflow-hidden rounded-[40px] border ${
+          className={`absolute -left-24 -top-24 h-72 w-72 rounded-full blur-3xl ${
+            darkMode ? "bg-zinc-700/30" : "bg-white"
+          }`}
+        />
+
+        <div
+          className={`absolute -bottom-24 -right-24 h-72 w-72 rounded-full blur-3xl ${
+            darkMode ? "bg-zinc-700/30" : "bg-zinc-200"
+          }`}
+        />
+
+        {/* Small top badge */}
+
+        <div
+          className={`absolute left-6 top-6 z-20 rounded-full border px-5 py-2 text-xs font-bold tracking-[0.25em] backdrop-blur-md sm:left-10 sm:top-10 ${
             darkMode
-              ? "border-zinc-800 bg-zinc-900"
-              : "border-gray-200 bg-zinc-50"
+              ? "border-zinc-700 bg-black/50 text-zinc-200"
+              : "border-zinc-200 bg-white/80 text-zinc-700"
           }`}
         >
-          <div className="grid items-center md:grid-cols-2">
-            {/* OWNER IMAGE */}
-
-            <div className="relative flex min-h-[520px] items-center justify-center overflow-hidden p-8 md:p-12">
-              <div
-                className={`absolute inset-0 ${
-                  darkMode
-                    ? "bg-gradient-to-br from-zinc-800 to-zinc-950"
-                    : "bg-gradient-to-br from-zinc-200 to-white"
-                }`}
-              />
-
-              <div className="relative">
-                <div
-                  className={`absolute -inset-4 rounded-[35px] border ${
-                    darkMode
-                      ? "border-zinc-700"
-                      : "border-zinc-300"
-                  }`}
-                />
-
-                <img
-                  src={shahzaib}
-                  alt="Shahzaib - Founder and Owner of LUXEWEAR"
-                  className="relative h-[420px] w-[320px] rounded-[30px] object-cover object-center shadow-2xl transition duration-500 hover:scale-[1.02]"
-                />
-
-                <div
-                  className={`absolute bottom-5 left-5 right-5 rounded-2xl px-5 py-4 backdrop-blur-md ${
-                    darkMode
-                      ? "bg-black/70 text-white"
-                      : "bg-white/90 text-zinc-900"
-                  }`}
-                >
-                  <p className="text-xs font-semibold tracking-[0.25em] text-gray-500">
-                    FOUNDER
-                  </p>
-
-                  <p className="mt-1 text-lg font-bold">
-                    Shahzaib
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* OWNER CONTENT */}
-
-            <div className="px-8 py-14 md:px-14">
-              <p className="text-sm font-semibold tracking-[0.3em] text-gray-500">
-                MEET THE OWNER
-              </p>
-
-              <h2 className="mt-5 text-5xl font-bold md:text-6xl">
-                Shahzaib
-              </h2>
-
-              <p className="mt-3 text-lg font-medium text-gray-500">
-                Founder & Owner of LUXEWEAR
-              </p>
-
-              <div
-                className={`mt-7 h-px w-20 ${
-                  darkMode ? "bg-white" : "bg-black"
-                }`}
-              />
-
-              <p className="mt-7 text-lg leading-8 text-gray-500">
-                Welcome to LUXEWEAR. I created this website
-                with a passion for modern men's fashion, premium
-                style and a better online shopping experience.
-              </p>
-
-              <p className="mt-5 leading-8 text-gray-500">
-                My goal is to build a stylish and trusted fashion
-                store where customers can discover quality
-                clothing, explore new collections and enjoy a
-                simple shopping experience.
-              </p>
-
-              <div className="mt-8 grid grid-cols-2 gap-4">
-                <div
-                  className={`rounded-2xl p-5 ${
-                    darkMode ? "bg-zinc-800" : "bg-white"
-                  }`}
-                >
-                  <p className="text-2xl font-bold">
-                    LUXEWEAR
-                  </p>
-
-                  <p className="mt-1 text-sm text-gray-500">
-                    Fashion Brand
-                  </p>
-                </div>
-
-                <div
-                  className={`rounded-2xl p-5 ${
-                    darkMode ? "bg-zinc-800" : "bg-white"
-                  }`}
-                >
-                  <p className="text-2xl font-bold">
-                    Premium
-                  </p>
-
-                  <p className="mt-1 text-sm text-gray-500">
-                    Men's Style
-                  </p>
-                </div>
-              </div>
-
-              <a
-                href="mailto:support@luxewear.com"
-                className="mt-8 inline-block rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:-translate-y-1 hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
-              >
-                Contact the Owner →
-              </a>
-            </div>
-          </div>
+          LUXEWEAR
         </div>
-      </section>
 
-      {/* =====================================================
-          SUPPORT STATS
-      ====================================================== */}
+        {/* Image wrapper */}
 
-      <section
-        className={`px-6 py-16 ${
-          darkMode ? "bg-zinc-900" : "bg-zinc-100"
-        }`}
-      >
-        <div className="mx-auto grid max-w-6xl gap-8 text-center sm:grid-cols-2 md:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label}>
-              <h3 className="text-4xl font-bold md:text-5xl">
-                {stat.number}
-              </h3>
+        <div className="relative z-10">
 
-              <p className="mt-2 text-gray-500">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* =====================================================
-          SUPPORT SERVICES
-      ====================================================== */}
-
-      <section className="px-6 py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-14 text-center">
-            <p className="text-sm tracking-[0.3em] text-gray-500">
-              HOW CAN WE HELP?
-            </p>
-
-            <h2 className="mt-5 text-4xl font-bold md:text-6xl">
-              We're Here For You.
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-2xl text-gray-500">
-              Whatever you need, our team is ready to make your
-              shopping experience simple and stress-free.
-            </p>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((service) => (
-              <div
-                key={service.title}
-                className={`rounded-3xl border p-7 transition duration-300 hover:-translate-y-2 hover:shadow-xl ${
-                  darkMode
-                    ? "border-zinc-800 bg-zinc-900"
-                    : "border-gray-200 bg-white"
-                }`}
-              >
-                <div className="text-4xl">
-                  {service.icon}
-                </div>
-
-                <h3 className="mt-6 text-xl font-bold">
-                  {service.title}
-                </h3>
-
-                <p className="mt-4 leading-7 text-gray-500">
-                  {service.text}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          ORDER TRACKING
-      ====================================================== */}
-
-      <section
-        className={`px-6 py-20 ${
-          darkMode ? "bg-zinc-900" : "bg-zinc-100"
-        }`}
-      >
-        <div className="mx-auto max-w-5xl">
-          <div className="rounded-[35px] bg-black px-8 py-12 text-white md:px-14">
-            <div className="grid items-center gap-10 md:grid-cols-2">
-              <div>
-                <p className="text-sm tracking-[0.3em] text-zinc-400">
-                  ORDER SUPPORT
-                </p>
-
-                <h2 className="mt-4 text-4xl font-bold md:text-5xl">
-                  Need to check your order?
-                </h2>
-
-                <p className="mt-5 leading-7 text-zinc-400">
-                  Enter your order number and contact our team
-                  for assistance with your delivery.
-                </p>
-              </div>
-
-              <form
-                onSubmit={handleTrackOrder}
-                className="flex flex-col gap-3"
-              >
-                <input
-                  type="text"
-                  name="orderNumber"
-                  value={form.orderNumber}
-                  onChange={handleChange}
-                  placeholder="Enter order number"
-                  className="rounded-full border border-zinc-700 bg-zinc-900 px-6 py-4 text-white outline-none placeholder:text-zinc-500 focus:border-white"
-                  required
-                />
-
-                <button
-                  type="submit"
-                  className="rounded-full bg-white px-6 py-4 font-semibold text-black transition hover:scale-[1.02]"
-                >
-                  Track Order →
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          CONTACT FORM
-      ====================================================== */}
-
-      <section className="px-6 py-24">
-        <div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-2">
-          {/* LEFT SIDE */}
-
-          <div>
-            <p className="text-sm tracking-[0.3em] text-gray-500">
-              WE'D LOVE TO HEAR FROM YOU
-            </p>
-
-            <h2 className="mt-5 text-5xl font-bold md:text-6xl">
-              Let's Talk.
-            </h2>
-
-            <p className="mt-6 max-w-lg text-lg leading-8 text-gray-500">
-              Whether you need help choosing the perfect outfit,
-              tracking your order or requesting an exchange,
-              send us a message.
-            </p>
-
-            <div
-              className={`mt-10 rounded-3xl p-8 ${
-                darkMode ? "bg-zinc-900" : "bg-zinc-100"
-              }`}
-            >
-              <div className="flex items-start gap-5">
-                <div className="text-3xl">💬</div>
-
-                <div>
-                  <h3 className="text-xl font-bold">
-                    Customer Support
-                  </h3>
-
-                  <p className="mt-2 leading-7 text-gray-500">
-                    Our support team usually responds within
-                    24 hours during business days.
-                  </p>
-
-                  <a
-                    href="https://wa.me/923001234567"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-5 inline-block rounded-full bg-black px-6 py-3 font-semibold text-white transition hover:scale-105 dark:bg-white dark:text-black"
-                  >
-                    WhatsApp Us →
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className={`mt-5 rounded-3xl border p-8 ${
-                darkMode
-                  ? "border-zinc-800"
-                  : "border-gray-200"
-              }`}
-            >
-              <h3 className="text-xl font-bold">
-                Need help with an order?
-              </h3>
-
-              <p className="mt-3 text-gray-500">
-                Keep your order number ready so our team can
-                assist you faster.
-              </p>
-            </div>
-
-            <div
-              className={`mt-5 rounded-3xl border p-8 ${
-                darkMode
-                  ? "border-zinc-800"
-                  : "border-gray-200"
-              }`}
-            >
-              <div className="flex gap-5">
-                <div className="text-3xl">📍</div>
-
-                <div>
-                  <h3 className="text-xl font-bold">
-                    Our Store
-                  </h3>
-
-                  <p className="mt-3 leading-7 text-gray-500">
-                    LUXEWEAR Fashion Store
-                    <br />
-                    Lahore, Pakistan
-                    <br />
-                    Monday - Saturday
-                    <br />
-                    10:00 AM - 8:00 PM
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* FORM */}
+          {/* Outer glow/frame */}
 
           <div
-            className={`rounded-3xl border p-8 shadow-sm md:p-10 ${
+            className={`absolute -inset-5 rounded-[38px] border ${
               darkMode
-                ? "border-zinc-800 bg-zinc-900"
-                : "border-gray-200 bg-white"
+                ? "border-zinc-700"
+                : "border-zinc-300"
+            }`}
+          />
+
+          <div
+            className={`absolute -inset-2 rounded-[34px] ${
+              darkMode ? "bg-zinc-800/30" : "bg-white/50"
+            }`}
+          />
+
+          {/* Founder image */}
+
+          <img
+            src="/shahzaib.png"
+            alt="Shahzaib - Founder of LUXEWEAR"
+            className="relative h-[460px] w-[330px] rounded-[30px] object-cover object-center shadow-2xl transition duration-700 hover:scale-[1.02] sm:h-[500px] sm:w-[360px]"
+            onError={(e) => {
+              e.currentTarget.src =
+                "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=85";
+            }}
+          />
+
+          {/* Image bottom information */}
+
+          <div
+            className={`absolute bottom-5 left-5 right-5 rounded-2xl border px-5 py-4 shadow-xl backdrop-blur-xl ${
+              darkMode
+                ? "border-white/10 bg-black/75 text-white"
+                : "border-white/60 bg-white/90 text-zinc-900"
             }`}
           >
-            {submitted && (
-              <div className="mb-6 rounded-2xl bg-green-100 px-5 py-4 font-medium text-green-800">
-                ✓ Your message has been sent successfully!
-                <br />
-                <span className="text-sm">
-                  Our team will contact you soon.
-                </span>
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="mb-2 block text-sm font-semibold">
-                  Your Name
-                </label>
-
-                <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  placeholder="Enter your name"
-                  required
-                  className={inputStyle}
-                />
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-semibold">
-                  Email Address
-                </label>
-
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder="you@example.com"
-                  required
-                  className={inputStyle}
-                />
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-semibold">
-                  Phone Number
-                </label>
-
-                <input
-                  type="tel"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  placeholder="+92 300 1234567"
-                  className={inputStyle}
-                />
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-semibold">
-                  Subject
-                </label>
-
-                <select
-                  name="subject"
-                  value={form.subject}
-                  onChange={handleChange}
-                  required
-                  className={inputStyle}
-                >
-                  <option value="">Select a subject</option>
-                  <option value="order">Order Question</option>
-                  <option value="product">Product Question</option>
-                  <option value="delivery">Delivery</option>
-                  <option value="return">
-                    Return / Exchange
-                  </option>
-                  <option value="payment">Payment</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <div>
-                <div className="mb-2 flex items-center justify-between">
-                  <label className="text-sm font-semibold">
-                    Your Message
-                  </label>
-
-                  <span className="text-xs text-gray-500">
-                    {form.message.length}/500
-                  </span>
-                </div>
-
-                <textarea
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  placeholder="Write your message..."
-                  required
-                  rows="6"
-                  className={`${inputStyle} resize-none`}
-                />
-              </div>
-
-              <label className="flex cursor-pointer items-start gap-3 text-sm text-gray-500">
-                <input
-                  type="checkbox"
-                  required
-                  className="mt-1 h-4 w-4"
-                />
-
-                <span>
-                  I agree that LUXEWEAR may contact me
-                  regarding my inquiry.
-                </span>
-              </label>
-
-              <button
-                type="submit"
-                className="w-full rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:scale-[1.02] hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
-              >
-                Send Message →
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          FAQ
-      ====================================================== */}
-
-      <section
-        className={`px-6 py-24 ${
-          darkMode ? "bg-zinc-900" : "bg-zinc-100"
-        }`}
-      >
-        <div className="mx-auto max-w-4xl">
-          <div className="text-center">
-            <p className="text-sm tracking-[0.3em] text-gray-500">
-              NEED HELP?
+            <p className="text-[10px] font-bold tracking-[0.3em] text-gray-500">
+              FOUNDER & OWNER
             </p>
 
-            <h2 className="mt-4 text-4xl font-bold md:text-5xl">
-              Frequently Asked Questions
-            </h2>
+            <div className="mt-1 flex items-center justify-between gap-4">
+              <p className="text-xl font-bold">
+                Shahzaib
+              </p>
 
-            <p className="mx-auto mt-5 max-w-2xl text-gray-500">
-              Find quick answers to some of the most common
-              questions from our customers.
-            </p>
-          </div>
-
-          <div className="mt-12 space-y-4">
-            {faqs.map((faq) => (
-              <details
-                key={faq.question}
-                className={`group rounded-2xl p-6 ${
-                  darkMode ? "bg-zinc-950" : "bg-white"
-                }`}
-              >
-                <summary className="cursor-pointer list-none font-semibold">
-                  <div className="flex items-center justify-between gap-5">
-                    <span>{faq.question}</span>
-
-                    <span className="text-xl transition group-open:rotate-45">
-                      +
-                    </span>
-                  </div>
-                </summary>
-
-                <p className="mt-4 leading-7 text-gray-500">
-                  {faq.answer}
-                </p>
-              </details>
-            ))}
+              <span className="rounded-full bg-black px-3 py-1 text-[10px] font-bold tracking-wider text-white dark:bg-white dark:text-black">
+                LUXEWEAR
+              </span>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* =====================================================
-          NEWSLETTER
-      ====================================================== */}
+      {/* =================================================
+          FOUNDER INFORMATION
+      ================================================== */}
 
-      <section className="px-6 py-24">
+      <div className="flex flex-col justify-center px-7 py-14 sm:px-10 lg:px-16 lg:py-20">
+
+        {/* Label */}
+
+        <div className="flex items-center gap-3">
+          <span
+            className={`h-px w-10 ${
+              darkMode ? "bg-zinc-600" : "bg-zinc-400"
+            }`}
+          />
+
+          <p className="text-xs font-bold tracking-[0.35em] text-gray-500">
+            MEET THE FOUNDER
+          </p>
+        </div>
+
+        {/* Heading */}
+
+        <h2 className="mt-6 text-5xl font-black tracking-tight sm:text-6xl">
+          Shahzaib
+        </h2>
+
+        <p className="mt-3 text-lg font-medium text-gray-500">
+          Founder & Owner of LUXEWEAR
+        </p>
+
+        {/* Divider */}
+
         <div
-          className={`mx-auto max-w-6xl rounded-[35px] px-8 py-16 text-center md:px-16 ${
-            darkMode ? "bg-zinc-900" : "bg-zinc-200"
+          className={`mt-7 h-1 w-16 rounded-full ${
+            darkMode ? "bg-white" : "bg-black"
+          }`}
+        />
+
+        {/* Description */}
+
+        <p className="mt-8 text-base leading-8 text-gray-500 sm:text-lg">
+          Welcome to LUXEWEAR. I'm Shahzaib, the founder
+          and owner of LUXEWEAR. I created this brand with
+          a passion for modern men's fashion, premium
+          style and a better online shopping experience.
+        </p>
+
+        <p className="mt-5 text-base leading-8 text-gray-500">
+          My vision is simple — bring together timeless
+          fashion, modern design and quality clothing in
+          one premium destination for men.
+        </p>
+
+        {/* =================================================
+            FEATURE CARDS
+        ================================================== */}
+
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+          {/* Card 1 */}
+
+          <div
+            className={`group rounded-2xl border p-5 transition duration-300 hover:-translate-y-1 ${
+              darkMode
+                ? "border-zinc-800 bg-zinc-900 hover:border-zinc-700"
+                : "border-zinc-200 bg-zinc-50 hover:border-zinc-300"
+            }`}
+          >
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-black text-xl text-white dark:bg-white dark:text-black">
+              👔
+            </div>
+
+            <h3 className="mt-4 font-bold">
+              Men's Fashion
+            </h3>
+
+            <p className="mt-1 text-sm text-gray-500">
+              Modern & timeless style
+            </p>
+          </div>
+
+          {/* Card 2 */}
+
+          <div
+            className={`group rounded-2xl border p-5 transition duration-300 hover:-translate-y-1 ${
+              darkMode
+                ? "border-zinc-800 bg-zinc-900 hover:border-zinc-700"
+                : "border-zinc-200 bg-zinc-50 hover:border-zinc-300"
+            }`}
+          >
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-black text-xl text-white dark:bg-white dark:text-black">
+              ✨
+            </div>
+
+            <h3 className="mt-4 font-bold">
+              Premium Quality
+            </h3>
+
+            <p className="mt-1 text-sm text-gray-500">
+              Designed for confidence
+            </p>
+          </div>
+
+        </div>
+
+        {/* =================================================
+            MINI STATS
+        ================================================== */}
+
+        <div
+          className={`mt-7 grid grid-cols-3 divide-x rounded-2xl border py-5 ${
+            darkMode
+              ? "divide-zinc-800 border-zinc-800 bg-zinc-900"
+              : "divide-zinc-200 border-zinc-200 bg-zinc-50"
           }`}
         >
-          <p className="text-sm tracking-[0.3em] text-gray-500">
-            STAY CONNECTED
-          </p>
 
-          <h2 className="mt-5 text-4xl font-bold md:text-5xl">
-            Join The LUXEWEAR Community
-          </h2>
+          <div className="px-3 text-center">
+            <p className="text-xl font-black sm:text-2xl">
+              100%
+            </p>
 
-          <p className="mx-auto mt-5 max-w-xl text-gray-500">
-            Get fashion updates, new arrivals and exclusive
-            offers directly in your inbox.
-          </p>
+            <p className="mt-1 text-[10px] font-medium uppercase tracking-wider text-gray-500 sm:text-xs">
+              Passion
+            </p>
+          </div>
 
-          <form
-            onSubmit={handleNewsletter}
-            className="mx-auto mt-8 flex max-w-xl flex-col gap-3 sm:flex-row"
+          <div className="px-3 text-center">
+            <p className="text-xl font-black sm:text-2xl">
+              24/7
+            </p>
+
+            <p className="mt-1 text-[10px] font-medium uppercase tracking-wider text-gray-500 sm:text-xs">
+              Support
+            </p>
+          </div>
+
+          <div className="px-3 text-center">
+            <p className="text-xl font-black sm:text-2xl">
+              Premium
+            </p>
+
+            <p className="mt-1 text-[10px] font-medium uppercase tracking-wider text-gray-500 sm:text-xs">
+              Experience
+            </p>
+          </div>
+
+        </div>
+
+        {/* =================================================
+            BUTTONS
+        ================================================== */}
+
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+
+          <a
+            href="mailto:support@luxewear.com"
+            className="group inline-flex items-center justify-center gap-2 rounded-full bg-black px-7 py-4 text-sm font-bold text-white transition duration-300 hover:-translate-y-1 hover:bg-zinc-800 hover:shadow-xl dark:bg-white dark:text-black dark:hover:bg-zinc-200"
           >
-            <input
-              type="email"
-              value={newsletterEmail}
-              onChange={(e) =>
-                setNewsletterEmail(e.target.value)
-              }
-              placeholder="Enter your email"
-              required
-              className={`flex-1 rounded-full border px-6 py-4 outline-none ${
-                darkMode
-                  ? "border-zinc-700 bg-zinc-950 text-white placeholder:text-zinc-500"
-                  : "border-gray-300 bg-white"
-              }`}
-            />
-
-            <button
-              type="submit"
-              className="rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:scale-105 dark:bg-white dark:text-black"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </section>
-
-      {/* =====================================================
-          SOCIAL
-      ====================================================== */}
-
-      <section className="px-6 py-20">
-        <div className="mx-auto max-w-5xl text-center">
-          <p className="text-sm tracking-[0.3em] text-gray-500">
-            FOLLOW LUXEWEAR
-          </p>
-
-          <h2 className="mt-5 text-4xl font-bold md:text-6xl">
-            Stay Connected.
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-xl text-gray-500">
-            Follow us for new collections, fashion inspiration,
-            special offers and exclusive updates.
-          </p>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            {["Instagram", "Facebook", "TikTok", "YouTube"].map(
-              (social) => (
-                <a
-                  href="#"
-                  key={social}
-                  className={`rounded-full border px-6 py-3 font-semibold transition ${
-                    darkMode
-                      ? "border-zinc-700 hover:bg-white hover:text-black"
-                      : "border-zinc-300 hover:bg-black hover:text-white"
-                  }`}
-                >
-                  {social}
-                </a>
-              )
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          FINAL CTA
-      ====================================================== */}
-
-      <section className="px-6 pb-24">
-        <div className="mx-auto max-w-5xl rounded-[35px] bg-black px-8 py-16 text-center text-white md:px-20">
-          <p className="text-sm tracking-[0.3em] text-zinc-400">
-            LUXEWEAR SUPPORT
-          </p>
-
-          <h2 className="mt-5 text-4xl font-bold md:text-6xl">
-            We're Here
-            <br />
-            <span className="font-light italic">
-              To Help.
+            Contact Owner
+            <span className="transition-transform duration-300 group-hover:translate-x-1">
+              →
             </span>
-          </h2>
+          </a>
 
-          <p className="mx-auto mt-6 max-w-xl text-zinc-400">
-            Have a question? Don't hesitate to reach out.
-            Our team is always happy to help.
-          </p>
+          <a
+            href="https://wa.me/923001234567"
+            target="_blank"
+            rel="noreferrer"
+            className={`inline-flex items-center justify-center gap-2 rounded-full border px-7 py-4 text-sm font-bold transition duration-300 hover:-translate-y-1 ${
+              darkMode
+                ? "border-zinc-700 hover:bg-zinc-800"
+                : "border-zinc-300 hover:bg-zinc-100"
+            }`}
+          >
+            <span>WhatsApp</span>
+            <span>↗</span>
+          </a>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <a
-              href="mailto:support@luxewear.com"
-              className="rounded-full bg-white px-8 py-4 font-semibold text-black transition hover:scale-105"
-            >
-              Contact Support →
-            </a>
-
-            <a
-              href="https://wa.me/923001234567"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-full border border-zinc-600 px-8 py-4 font-semibold transition hover:bg-zinc-900"
-            >
-              WhatsApp →
-            </a>
-          </div>
         </div>
-      </section>
-    </main>
-  );
-};
 
-export default Contact;
+        {/* Small footer text */}
+
+        <p className="mt-6 text-xs leading-5 text-gray-500">
+          Building LUXEWEAR with passion, creativity and
+          a focus on modern men's fashion.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* =====================================================
+    SUPPORT STATS
+====================================================== */}
