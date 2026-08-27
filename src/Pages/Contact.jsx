@@ -134,7 +134,7 @@ function Contact({ darkMode = false }) {
   const founders = [
     {
       image: "/shahzaib.png",
-      name: "Shahzaib",
+      name: "Shahzaib khan",
       role: "Co-Founder & Developer",
       description:
         "Shahzaib contributes to the development of creative digital solutions and modern web experiences.",
