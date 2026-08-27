@@ -39,7 +39,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             : "bg-zinc-950 text-white"
         }`}
       >
-        FREE SHIPPING ON ORDERS OVER RS. 10,000
+        FREE SH0PPING ON ORDERS OVER RS. 10,000
       </div>
 
       {/* Main Navbar */}
