@@ -3,61 +3,68 @@ import { Link } from "react-router-dom";
 
 const Home = ({ darkMode }) => {
   const [email, setEmail] = useState("");
+  const [liked, setLiked] = useState([]);
 
   const products = [
     {
       id: 1,
       name: "Premium Black Shirt",
+      category: "ESSENTIALS",
       price: "Rs. 4,999",
       rating: "4.9",
-      reviews: "128",
+      reviews: 128,
       image:
-        "https://images.unsplash.com/photo-1603252110481-7ba873bf42ab?auto=format&fit=crop&w=800&q=85",
+        "https://images.unsplash.com/photo-1603252110481-7ba873bf42ab?auto=format&fit=crop&w=900&q=90",
     },
     {
       id: 2,
       name: "Classic Beige Outfit",
+      category: "NEW ARRIVAL",
       price: "Rs. 5,499",
       rating: "4.8",
-      reviews: "96",
+      reviews: 96,
       image:
-        "https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=800&q=85",
+        "https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=900&q=90",
     },
     {
       id: 3,
       name: "Modern Casual Wear",
+      category: "CASUAL",
       price: "Rs. 3,999",
       rating: "4.9",
-      reviews: "84",
+      reviews: 84,
       image:
-        "https://images.unsplash.com/photo-1610652492500-ded49ceeb378?auto=format&fit=crop&w=800&q=85",
+        "https://images.unsplash.com/photo-1610652492500-ded49ceeb378?auto=format&fit=crop&w=900&q=90",
     },
     {
       id: 4,
       name: "Luxury Formal Suit",
+      category: "FORMAL",
       price: "Rs. 12,999",
       rating: "5.0",
-      reviews: "73",
+      reviews: 73,
       image:
-        "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=85",
+        "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=900&q=90",
     },
     {
       id: 5,
       name: "Premium Denim Jacket",
+      category: "JACKETS",
       price: "Rs. 7,499",
       rating: "4.8",
-      reviews: "112",
+      reviews: 112,
       image:
-        "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=85",
+        "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=90",
     },
     {
       id: 6,
       name: "Minimal White T-Shirt",
+      category: "BASICS",
       price: "Rs. 2,999",
       rating: "4.9",
-      reviews: "156",
+      reviews: 156,
       image:
-        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85",
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=90",
     },
   ];
 
@@ -66,72 +73,56 @@ const Home = ({ darkMode }) => {
       name: "Shirts",
       count: "24+ Products",
       image:
-        "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=800&q=85",
+        "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=900&q=90",
     },
     {
       name: "T-Shirts",
       count: "30+ Products",
       image:
-        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85",
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=90",
     },
     {
       name: "Jackets",
       count: "18+ Products",
       image:
-        "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=85",
+        "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=90",
     },
     {
       name: "Formal Wear",
       count: "15+ Products",
       image:
-        "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=85",
+        "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=90",
     },
   ];
 
   const reviews = [
     {
       name: "Ahmed Khan",
-      role: "Verified Customer",
       review:
         "Amazing quality and perfect fitting. The fabric feels premium and delivery was very fast.",
       rating: 5,
     },
     {
       name: "Hamza Ali",
-      role: "Verified Customer",
       review:
         "LUXEWEAR has become my favorite men's clothing store. The designs are clean and stylish.",
       rating: 5,
     },
     {
       name: "Usman Raza",
-      role: "Verified Customer",
       review:
-        "Excellent experience. Product looked exactly like the pictures and the quality was impressive.",
+        "Excellent experience. The product looked exactly like the pictures and the quality was impressive.",
       rating: 5,
     },
   ];
 
-  const stats = [
-    {
-      number: "10K+",
-      label: "Happy Customers",
-    },
-    {
-      number: "500+",
-      label: "Premium Products",
-    },
-    {
-      number: "4.9/5",
-      label: "Customer Rating",
-    },
-    {
-      number: "25+",
-      label: "Cities Delivered",
-    },
-  ];
-
-  const brands = ["LUXEWEAR", "FENDI", "YSL", "H&M", "GUCCI"];
+  const toggleLike = (id) => {
+    setLiked((current) =>
+      current.includes(id)
+        ? current.filter((item) => item !== id)
+        : [...current, id]
+    );
+  };
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -144,123 +135,157 @@ const Home = ({ darkMode }) => {
 
   return (
     <main
-      className={
+      className={`min-h-screen overflow-hidden transition-colors duration-500 ${
         darkMode
-          ? "min-h-screen bg-zinc-950 text-white"
-          : "min-h-screen bg-zinc-100 text-zinc-900"
-      }
+          ? "bg-zinc-950 text-white"
+          : "bg-[#f7f7f5] text-zinc-950"
+      }`}
     >
       {/* =====================================================
-          HERO SECTION
+          HERO
       ====================================================== */}
 
-      <section className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-16 md:grid-cols-2 md:py-24">
-        <div>
-          <div className="mb-6 inline-flex rounded-full border border-zinc-300 px-4 py-2 text-xs font-semibold tracking-[0.2em] dark:border-zinc-700">
-            NEW SEASON 2026
-          </div>
+      <section className="relative px-6 pb-24 pt-10 md:pt-16">
+        <div className="pointer-events-none absolute left-[-150px] top-20 h-[400px] w-[400px] rounded-full bg-zinc-300/20 blur-3xl dark:bg-white/5" />
 
-          <p
-            className={`mb-6 text-sm tracking-[0.35em] ${
-              darkMode ? "text-zinc-400" : "text-slate-500"
-            }`}
-          >
-            MEN'S FASHION
-          </p>
-
-          <h1 className="text-6xl font-bold leading-[0.95] md:text-8xl">
-            Style That
-            <br />
-            <span className="font-light italic">Defines You.</span>
-          </h1>
-
-          <p
-            className={`mt-8 max-w-xl text-lg leading-8 ${
-              darkMode ? "text-zinc-400" : "text-slate-500"
-            }`}
-          >
-            Discover premium men's clothing designed for confidence,
-            comfort and modern living. From everyday essentials to
-            sophisticated formal wear.
-          </p>
-
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              to="/shop"
-              className="rounded-full bg-black px-8 py-4 font-semibold text-white transition duration-300 hover:scale-105 hover:bg-zinc-800"
-            >
-              Shop Collection →
-            </Link>
-
-            <Link
-              to="/new-arrivals"
-              className={`rounded-full border px-8 py-4 font-semibold transition duration-300 hover:scale-105 ${
+        <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="relative z-10">
+            <div
+              className={`mb-7 inline-flex items-center gap-3 rounded-full border px-4 py-2 text-xs font-bold tracking-[0.25em] ${
                 darkMode
-                  ? "border-zinc-700 hover:bg-zinc-800"
-                  : "border-zinc-300 hover:bg-white"
+                  ? "border-zinc-700 bg-zinc-900"
+                  : "border-zinc-300 bg-white"
               }`}
             >
-              New Arrivals
-            </Link>
-          </div>
-
-          <div className="mt-10 flex flex-wrap gap-8">
-            <div>
-              <p className="text-2xl font-bold">10K+</p>
-              <p className="text-sm text-slate-500">Customers</p>
+              <span className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
+              NEW SEASON 2026
             </div>
 
-            <div>
-              <p className="text-2xl font-bold">4.9★</p>
-              <p className="text-sm text-slate-500">Rating</p>
-            </div>
-
-            <div>
-              <p className="text-2xl font-bold">500+</p>
-              <p className="text-sm text-slate-500">Products</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative overflow-hidden rounded-[30px]">
-          <img
-            src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=1200&q=85"
-            alt="Men's fashion"
-            className="h-[550px] w-full object-cover transition duration-700 hover:scale-105 md:h-[680px]"
-          />
-
-          <div className="absolute bottom-6 left-6 rounded-2xl bg-white/90 p-5 text-black backdrop-blur-md">
-            <p className="text-xs tracking-widest text-zinc-500">
-              FEATURED
+            <p className="mb-5 text-xs font-bold tracking-[0.4em] text-zinc-500">
+              LUXEWEAR / MEN'S COLLECTION
             </p>
 
-            <p className="mt-1 font-bold">
-              Premium Collection
+            <h1 className="max-w-3xl text-6xl font-black leading-[0.88] tracking-[-0.06em] sm:text-7xl lg:text-[92px]">
+              WEAR
+              <br />
+              <span className="font-light italic">YOUR</span>
+              <br />
+              STATEMENT.
+            </h1>
+
+            <p
+              className={`mt-8 max-w-xl text-lg leading-8 ${
+                darkMode ? "text-zinc-400" : "text-zinc-500"
+              }`}
+            >
+              Premium men's fashion built for confidence, comfort and
+              unforgettable first impressions.
             </p>
+
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link
+                to="/shop"
+                className="group rounded-full bg-black px-8 py-4 font-bold text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl dark:bg-white dark:text-black"
+              >
+                Explore Collection
+                <span className="ml-3 inline-block transition group-hover:translate-x-2">
+                  →
+                </span>
+              </Link>
+
+              <Link
+                to="/new-arrivals"
+                className={`rounded-full border px-8 py-4 font-bold transition duration-300 hover:-translate-y-1 ${
+                  darkMode
+                    ? "border-zinc-700 hover:bg-zinc-900"
+                    : "border-zinc-300 bg-white hover:bg-zinc-100"
+                }`}
+              >
+                New Arrivals
+              </Link>
+            </div>
+
+            <div className="mt-12 grid max-w-lg grid-cols-3 border-y border-zinc-300/70 py-6 dark:border-zinc-800">
+              <div>
+                <p className="text-2xl font-black">10K+</p>
+                <p className="mt-1 text-xs text-zinc-500">CUSTOMERS</p>
+              </div>
+
+              <div className="border-x border-zinc-300/70 pl-5 dark:border-zinc-800">
+                <p className="text-2xl font-black">4.9</p>
+                <p className="mt-1 text-xs text-zinc-500">RATING</p>
+              </div>
+
+              <div className="pl-5">
+                <p className="text-2xl font-black">500+</p>
+                <p className="mt-1 text-xs text-zinc-500">PRODUCTS</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="absolute -right-5 -top-5 z-20 hidden rounded-full border border-zinc-300 bg-white px-5 py-3 text-xs font-bold shadow-xl sm:block dark:border-zinc-700 dark:bg-zinc-900">
+              PREMIUM QUALITY
+            </div>
+
+            <div className="group relative overflow-hidden rounded-[35px]">
+              <img
+                src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=1400&q=90"
+                alt="Premium men's fashion"
+                className="h-[620px] w-full object-cover transition duration-[1200ms] group-hover:scale-105 md:h-[720px]"
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+
+              <div className="absolute bottom-7 left-7 right-7 flex items-end justify-between text-white">
+                <div>
+                  <p className="text-xs tracking-[0.3em] text-zinc-300">
+                    FEATURED
+                  </p>
+                  <h3 className="mt-2 text-2xl font-bold">
+                    The Premium Edit
+                  </h3>
+                </div>
+
+                <div className="rounded-full bg-white/15 px-4 py-2 text-sm backdrop-blur-md">
+                  01 / 06
+                </div>
+              </div>
+            </div>
+
+            <div className="absolute -bottom-7 -left-7 hidden h-28 w-28 rounded-full border border-zinc-300 bg-white p-2 shadow-xl md:block dark:border-zinc-700 dark:bg-zinc-900">
+              <div className="flex h-full items-center justify-center rounded-full border border-dashed border-zinc-400 text-center text-[9px] font-bold tracking-widest">
+                LUXEWEAR
+                <br />
+                PREMIUM
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          BRAND STRIP
+          BRAND MARQUEE
       ====================================================== */}
 
       <section
-        className={`border-y px-6 py-8 ${
+        className={`border-y py-7 ${
           darkMode
             ? "border-zinc-800 bg-zinc-900"
             : "border-zinc-200 bg-white"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-8">
-          {brands.map((brand) => (
-            <span
-              key={brand}
-              className="text-xl font-bold tracking-widest text-zinc-400 transition hover:text-zinc-900 dark:hover:text-white"
-            >
-              {brand}
-            </span>
-          ))}
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-12 gap-y-5 px-6">
+          {["LUXEWEAR", "FENDI", "YSL", "H&M", "GUCCI", "PRADA"].map(
+            (brand) => (
+              <span
+                key={brand}
+                className="text-lg font-black tracking-[0.2em] text-zinc-400 transition hover:text-zinc-950 dark:hover:text-white"
+              >
+                {brand}
+              </span>
+            )
+          )}
         </div>
       </section>
 
@@ -269,86 +294,99 @@ const Home = ({ darkMode }) => {
       ====================================================== */}
 
       <section
-        className={`px-6 py-24 ${
+        className={`px-6 py-28 ${
           darkMode ? "bg-zinc-900" : "bg-white"
         }`}
       >
         <div className="mx-auto max-w-7xl">
-          <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <p className="mb-3 text-sm tracking-[0.3em] text-slate-500">
-                OUR COLLECTION
+              <p className="mb-4 text-xs font-bold tracking-[0.4em] text-zinc-500">
+                CURATED FOR YOU
               </p>
 
-              <h2 className="text-4xl font-bold md:text-5xl">
+              <h2 className="text-5xl font-black tracking-tight md:text-6xl">
                 Featured Pieces
               </h2>
 
-              <p className="mt-4 max-w-xl text-slate-500">
-                Carefully selected pieces made for modern men who
-                appreciate quality and timeless style.
+              <p className="mt-5 max-w-xl text-zinc-500">
+                Statement pieces, everyday essentials and timeless
+                silhouettes selected for the modern wardrobe.
               </p>
             </div>
 
             <Link
               to="/shop"
-              className="font-semibold underline underline-offset-8"
+              className="group font-bold underline underline-offset-8"
             >
-              View All Products →
+              View All
+              <span className="ml-2 inline-block transition group-hover:translate-x-2">
+                →
+              </span>
             </Link>
           </div>
 
-          <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((product) => (
-              <div
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {products.map((product, index) => (
+              <article
                 key={product.id}
-                className={`group overflow-hidden rounded-2xl ${
-                  darkMode ? "bg-zinc-800" : "bg-zinc-100"
+                className={`group overflow-hidden rounded-[25px] ${
+                  darkMode ? "bg-zinc-800" : "bg-[#f5f5f3]"
                 }`}
               >
                 <div className="relative overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="h-[390px] w-full object-cover transition duration-700 group-hover:scale-110"
+                    className="h-[440px] w-full object-cover transition duration-1000 group-hover:scale-110"
                   />
 
-                  <span className="absolute left-4 top-4 rounded-full bg-white px-3 py-1 text-xs font-bold text-black">
-                    NEW
-                  </span>
+                  <div className="absolute inset-x-0 top-0 flex items-center justify-between p-5">
+                    <span className="rounded-full bg-white px-4 py-2 text-[10px] font-black tracking-widest text-black shadow-lg">
+                      {index < 3 ? "NEW" : "POPULAR"}
+                    </span>
 
-                  <Link
-                    to="/shop"
-                    className="absolute bottom-4 left-1/2 w-[85%] -translate-x-1/2 translate-y-16 rounded-full bg-black py-3 text-center font-semibold text-white opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100"
-                  >
-                    View Product
-                  </Link>
+                    <button
+                      onClick={() => toggleLike(product.id)}
+                      aria-label={`Wishlist ${product.name}`}
+                      className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-xl text-black shadow-lg transition hover:scale-110"
+                    >
+                      {liked.includes(product.id) ? "♥" : "♡"}
+                    </button>
+                  </div>
+
+                  <div className="absolute bottom-5 left-1/2 w-[88%] -translate-x-1/2 translate-y-20 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                    <Link
+                      to="/shop"
+                      className="block rounded-full bg-black py-4 text-center font-bold text-white shadow-2xl"
+                    >
+                      View Product →
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="p-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold">
-                      {product.name}
-                    </h3>
+                  <p className="text-[10px] font-bold tracking-[0.3em] text-zinc-500">
+                    {product.category}
+                  </p>
 
-                    <span className="text-lg">♡</span>
+                  <div className="mt-3 flex items-start justify-between gap-4">
+                    <h3 className="text-xl font-bold">{product.name}</h3>
+                    <p className="whitespace-nowrap font-black">
+                      {product.price}
+                    </p>
                   </div>
 
-                  <div className="mt-3 flex items-center gap-2">
-                    <span className="text-yellow-500">
+                  <div className="mt-4 flex items-center gap-2 text-sm">
+                    <span className="tracking-wide text-yellow-500">
                       ★★★★★
                     </span>
-
-                    <span className="text-sm text-slate-500">
+                    <span className="text-zinc-500">
                       {product.rating} ({product.reviews})
                     </span>
                   </div>
-
-                  <p className="mt-4 text-lg font-bold">
-                    {product.price}
-                  </p>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -358,91 +396,92 @@ const Home = ({ darkMode }) => {
           CATEGORIES
       ====================================================== */}
 
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <div className="mb-12 text-center">
-          <p className="mb-3 text-sm tracking-[0.3em] text-slate-500">
-            SHOP BY CATEGORY
-          </p>
+      <section className="px-6 py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-14 text-center">
+            <p className="mb-4 text-xs font-bold tracking-[0.4em] text-zinc-500">
+              SHOP YOUR WAY
+            </p>
 
-          <h2 className="text-4xl font-bold md:text-5xl">
-            Find Your Style
-          </h2>
+            <h2 className="text-5xl font-black md:text-6xl">
+              Find Your Style
+            </h2>
 
-          <p className="mx-auto mt-4 max-w-xl text-slate-500">
-            Explore our carefully organized collections and find
-            something perfect for your wardrobe.
-          </p>
-        </div>
+            <p className="mx-auto mt-5 max-w-xl text-zinc-500">
+              From casual essentials to powerful formal looks.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
-          {categories.map((category) => (
-            <Link
-              to="/shop"
-              key={category.name}
-              className="group relative overflow-hidden rounded-2xl"
-            >
-              <img
-                src={category.image}
-                alt={category.name}
-                className="h-[300px] w-full object-cover transition duration-700 group-hover:scale-110"
-              />
+          <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
+            {categories.map((category) => (
+              <Link
+                to="/shop"
+                key={category.name}
+                className="group relative overflow-hidden rounded-[25px]"
+              >
+                <img
+                  src={category.image}
+                  alt={category.name}
+                  className="h-[380px] w-full object-cover transition duration-1000 group-hover:scale-110"
+                />
 
-              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6">
-                <h3 className="text-xl font-bold text-white">
-                  {category.name}
-                </h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
-                <p className="mt-1 text-sm text-zinc-300">
-                  {category.count}
-                </p>
+                <div className="absolute bottom-6 left-6 text-white">
+                  <p className="text-xs tracking-widest text-zinc-300">
+                    {category.count}
+                  </p>
 
-                <span className="mt-3 text-sm font-semibold text-white">
-                  Explore →
-                </span>
-              </div>
-            </Link>
-          ))}
+                  <h3 className="mt-2 text-2xl font-black">
+                    {category.name}
+                  </h3>
+
+                  <span className="mt-4 inline-block text-sm font-bold transition group-hover:translate-x-2">
+                    Explore →
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* =====================================================
-          SALE BANNER
+          BIG SALE
       ====================================================== */}
 
-      <section className="px-6 py-10">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-[30px] bg-black px-8 py-16 text-white md:px-16">
-          <div className="grid items-center gap-10 md:grid-cols-2">
-            <div>
-              <p className="mb-4 text-sm tracking-[0.3em] text-zinc-400">
-                LIMITED TIME OFFER
+      <section className="px-6 py-12">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-[35px] bg-black text-white">
+          <div className="grid items-center lg:grid-cols-2">
+            <div className="px-8 py-16 md:px-16 md:py-20">
+              <p className="text-xs font-bold tracking-[0.4em] text-zinc-500">
+                LIMITED DROP
               </p>
 
-              <h2 className="text-5xl font-bold md:text-7xl">
-                Up To
+              <h2 className="mt-6 text-6xl font-black leading-[0.9] md:text-8xl">
+                UP TO
                 <br />
-                <span className="font-light italic">
-                  50% OFF
-                </span>
+                <span className="font-light italic">50% OFF</span>
               </h2>
 
-              <p className="mt-6 max-w-md leading-7 text-zinc-400">
-                Upgrade your wardrobe with our latest men's
-                fashion collection at special prices.
+              <p className="mt-7 max-w-md leading-7 text-zinc-400">
+                Upgrade your wardrobe with premium pieces at prices
+                that won't stay for long.
               </p>
 
               <Link
                 to="/sale"
-                className="mt-8 inline-block rounded-full bg-white px-8 py-4 font-semibold text-black transition hover:scale-105"
+                className="mt-9 inline-block rounded-full bg-white px-8 py-4 font-bold text-black transition hover:-translate-y-1 hover:shadow-2xl"
               >
-                Shop Sale →
+                Shop The Sale →
               </Link>
             </div>
 
-            <div className="overflow-hidden rounded-2xl">
+            <div className="h-[450px] overflow-hidden lg:h-[560px]">
               <img
-                src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=1200&q=85"
-                alt="Sale collection"
-                className="h-[350px] w-full object-cover transition duration-700 hover:scale-105"
+                src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=1400&q=90"
+                alt="LUXEWEAR sale collection"
+                className="h-full w-full object-cover transition duration-1000 hover:scale-105"
               />
             </div>
           </div>
@@ -450,26 +489,27 @@ const Home = ({ darkMode }) => {
       </section>
 
       {/* =====================================================
-          STATISTICS
+          STATS
       ====================================================== */}
 
       <section
-        className={`px-6 py-20 ${
+        className={`px-6 py-24 ${
           darkMode ? "bg-zinc-900" : "bg-white"
         }`}
       >
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 md:grid-cols-4">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="text-center"
-            >
-              <h3 className="text-4xl font-bold md:text-5xl">
-                {stat.number}
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-10 md:grid-cols-4">
+          {[
+            ["10K+", "HAPPY CUSTOMERS"],
+            ["500+", "PREMIUM PRODUCTS"],
+            ["4.9/5", "CUSTOMER RATING"],
+            ["25+", "CITIES DELIVERED"],
+          ].map(([number, label]) => (
+            <div key={label} className="text-center">
+              <h3 className="text-5xl font-black md:text-6xl">
+                {number}
               </h3>
-
-              <p className="mt-3 text-sm text-slate-500">
-                {stat.label}
+              <p className="mt-3 text-[10px] font-bold tracking-[0.25em] text-zinc-500">
+                {label}
               </p>
             </div>
           ))}
@@ -480,38 +520,36 @@ const Home = ({ darkMode }) => {
           LOOKBOOK
       ====================================================== */}
 
-      <section className="px-6 py-24">
-        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2">
-          <div className="overflow-hidden rounded-[30px]">
+      <section className="px-6 py-28">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
+          <div className="group overflow-hidden rounded-[35px]">
             <img
-              src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?auto=format&fit=crop&w=1200&q=85"
-              alt="Men's casual style"
-              className="h-[550px] w-full object-cover transition duration-700 hover:scale-105"
+              src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?auto=format&fit=crop&w=1400&q=90"
+              alt="Men's lookbook"
+              className="h-[600px] w-full object-cover transition duration-1000 group-hover:scale-105"
             />
           </div>
 
-          <div className="flex flex-col justify-center">
-            <p className="mb-4 text-sm tracking-[0.3em] text-slate-500">
+          <div className="lg:pl-10">
+            <p className="text-xs font-bold tracking-[0.4em] text-zinc-500">
               THE LOOKBOOK
             </p>
 
-            <h2 className="text-5xl font-bold leading-tight md:text-6xl">
-              Everyday
+            <h2 className="mt-5 text-6xl font-black leading-[0.9] md:text-7xl">
+              EVERYDAY
               <br />
-              <span className="font-light italic">
-                Confidence.
-              </span>
+              <span className="font-light italic">CONFIDENCE.</span>
             </h2>
 
-            <p className="mt-7 max-w-lg text-lg leading-8 text-slate-500">
-              Great style doesn't need to be complicated. Build
-              your wardrobe with timeless pieces that work
-              together effortlessly.
+            <p className="mt-8 max-w-lg text-lg leading-8 text-zinc-500">
+              Great style doesn't need to be complicated. Build a
+              wardrobe around timeless pieces that work effortlessly
+              together.
             </p>
 
             <Link
               to="/shop"
-              className="mt-8 w-fit rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:scale-105"
+              className="mt-9 inline-block rounded-full bg-black px-8 py-4 font-bold text-white transition hover:-translate-y-1 dark:bg-white dark:text-black"
             >
               Discover The Look →
             </Link>
@@ -520,130 +558,109 @@ const Home = ({ darkMode }) => {
       </section>
 
       {/* =====================================================
-          WHY CHOOSE US
+          WHY LUXEWEAR
       ====================================================== */}
 
       <section
-        className={`px-6 py-24 ${
+        className={`px-6 py-28 ${
           darkMode ? "bg-zinc-900" : "bg-white"
         }`}
       >
         <div className="mx-auto max-w-7xl">
           <div className="mb-14 text-center">
-            <p className="mb-3 text-sm tracking-[0.3em] text-slate-500">
+            <p className="text-xs font-bold tracking-[0.4em] text-zinc-500">
               WHY LUXEWEAR
             </p>
 
-            <h2 className="text-4xl font-bold md:text-5xl">
-              Made For Your Lifestyle
+            <h2 className="mt-4 text-5xl font-black md:text-6xl">
+              Built Different.
             </h2>
           </div>
 
-          <div className="grid gap-7 md:grid-cols-3">
-            <div
-              className={`rounded-2xl border p-8 transition duration-300 hover:-translate-y-2 ${
-                darkMode
-                  ? "border-zinc-700"
-                  : "border-zinc-200"
-              }`}
-            >
-              <div className="mb-6 text-4xl">✦</div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                icon: "✦",
+                title: "Premium Quality",
+                text: "Carefully selected fabrics and excellent craftsmanship for a superior feel.",
+              },
+              {
+                icon: "↗",
+                title: "Fast Delivery",
+                text: "Get your favorite pieces delivered quickly, safely and conveniently.",
+              },
+              {
+                icon: "♡",
+                title: "Customer First",
+                text: "Every detail is designed around giving you a better shopping experience.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className={`group rounded-[25px] border p-9 transition duration-500 hover:-translate-y-3 ${
+                  darkMode
+                    ? "border-zinc-800 bg-zinc-950"
+                    : "border-zinc-200 bg-[#fafafa]"
+                }`}
+              >
+                <div className="mb-8 text-4xl transition duration-300 group-hover:scale-125">
+                  {item.icon}
+                </div>
 
-              <h3 className="text-xl font-bold">
-                Premium Quality
-              </h3>
+                <h3 className="text-2xl font-black">{item.title}</h3>
 
-              <p className="mt-4 leading-7 text-slate-500">
-                Carefully selected fabrics and excellent
-                craftsmanship for everyday comfort.
-              </p>
-            </div>
-
-            <div
-              className={`rounded-2xl border p-8 transition duration-300 hover:-translate-y-2 ${
-                darkMode
-                  ? "border-zinc-700"
-                  : "border-zinc-200"
-              }`}
-            >
-              <div className="mb-6 text-4xl">🚚</div>
-
-              <h3 className="text-xl font-bold">
-                Fast Delivery
-              </h3>
-
-              <p className="mt-4 leading-7 text-slate-500">
-                Get your favorite men's clothing delivered
-                quickly and safely.
-              </p>
-            </div>
-
-            <div
-              className={`rounded-2xl border p-8 transition duration-300 hover:-translate-y-2 ${
-                darkMode
-                  ? "border-zinc-700"
-                  : "border-zinc-200"
-              }`}
-            >
-              <div className="mb-6 text-4xl">♡</div>
-
-              <h3 className="text-xl font-bold">
-                Customer First
-              </h3>
-
-              <p className="mt-4 leading-7 text-slate-500">
-                Your satisfaction matters. We are here to
-                make your shopping experience better.
-              </p>
-            </div>
+                <p className="mt-4 leading-7 text-zinc-500">
+                  {item.text}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          CUSTOMER REVIEWS
+          REVIEWS
       ====================================================== */}
 
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <div className="mb-12 text-center">
-          <p className="mb-3 text-sm tracking-[0.3em] text-slate-500">
-            CUSTOMER LOVE
-          </p>
+      <section className="px-6 py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-14 text-center">
+            <p className="text-xs font-bold tracking-[0.4em] text-zinc-500">
+              CUSTOMER LOVE
+            </p>
 
-          <h2 className="text-4xl font-bold md:text-5xl">
-            What Our Customers Say
-          </h2>
-        </div>
+            <h2 className="mt-4 text-5xl font-black md:text-6xl">
+              Don't Take Our Word.
+            </h2>
+          </div>
 
-        <div className="grid gap-7 md:grid-cols-3">
-          {reviews.map((review) => (
-            <div
-              key={review.name}
-              className={`rounded-2xl p-8 ${
-                darkMode
-                  ? "bg-zinc-900"
-                  : "bg-white shadow-sm"
-              }`}
-            >
-              <div className="text-yellow-500">
-                {"★".repeat(review.rating)}
-              </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {reviews.map((review) => (
+              <div
+                key={review.name}
+                className={`rounded-[25px] p-8 ${
+                  darkMode
+                    ? "bg-zinc-900"
+                    : "bg-white shadow-[0_15px_50px_rgba(0,0,0,0.06)]"
+                }`}
+              >
+                <div className="text-yellow-500">
+                  {"★".repeat(review.rating)}
+                </div>
 
-              <p className="mt-6 leading-7 text-slate-500">
-                "{review.review}"
-              </p>
-
-              <div className="mt-7 border-t border-zinc-200 pt-5">
-                <p className="font-bold">
-                  {review.name}
+                <p className="mt-7 text-lg leading-8 text-zinc-500">
+                  "{review.review}"
                 </p>
 
-                <p className="mt-1 text-sm text-slate-500">
-                  {review.role}
-                </p>
+                <div className="mt-8 border-t border-zinc-200 pt-6 dark:border-zinc-800">
+                  <p className="font-black">{review.name}</p>
+                  <p className="mt-1 text-xs text-zinc-500">
+                    VERIFIED CUSTOMER
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
@@ -653,33 +670,33 @@ const Home = ({ darkMode }) => {
 
       <section className="px-6 py-12">
         <div
-          className={`mx-auto max-w-7xl rounded-[30px] px-8 py-16 text-center md:px-16 ${
+          className={`mx-auto max-w-6xl rounded-[35px] px-7 py-16 text-center md:px-16 ${
             darkMode ? "bg-zinc-900" : "bg-zinc-200"
           }`}
         >
-          <p className="mb-4 text-sm tracking-[0.3em] text-slate-500">
-            STAY IN THE LOOP
+          <p className="text-xs font-bold tracking-[0.4em] text-zinc-500">
+            EXCLUSIVE ACCESS
           </p>
 
-          <h2 className="text-4xl font-bold md:text-5xl">
-            Get 10% Off Your First Order
+          <h2 className="mt-5 text-5xl font-black md:text-6xl">
+            Get 10% Off.
           </h2>
 
-          <p className="mx-auto mt-5 max-w-xl text-slate-500">
-            Subscribe to our newsletter and receive exclusive
-            offers, new collection updates and fashion tips.
+          <p className="mx-auto mt-5 max-w-xl text-zinc-500">
+            Join the LUXEWEAR community for exclusive drops,
+            collection updates and private offers.
           </p>
 
           <form
             onSubmit={handleSubscribe}
-            className="mx-auto mt-8 flex max-w-xl flex-col gap-3 sm:flex-row"
+            className="mx-auto mt-9 flex max-w-xl flex-col gap-3 sm:flex-row"
           >
             <input
               type="email"
+              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email address"
-              required
+              placeholder="Your email address"
               className={`flex-1 rounded-full border px-6 py-4 outline-none ${
                 darkMode
                   ? "border-zinc-700 bg-zinc-800 text-white"
@@ -689,9 +706,9 @@ const Home = ({ darkMode }) => {
 
             <button
               type="submit"
-              className="rounded-full bg-black px-8 py-4 font-semibold text-white transition hover:scale-105"
+              className="rounded-full bg-black px-8 py-4 font-bold text-white transition hover:-translate-y-1 dark:bg-white dark:text-black"
             >
-              Subscribe
+              Join LUXEWEAR →
             </button>
           </form>
         </div>
@@ -701,28 +718,26 @@ const Home = ({ darkMode }) => {
           FINAL CTA
       ====================================================== */}
 
-      <section className="px-6 py-24">
+      <section className="px-6 py-32">
         <div className="mx-auto max-w-5xl text-center">
-          <p className="mb-5 text-sm tracking-[0.3em] text-slate-500">
-            READY TO UPGRADE?
+          <p className="text-xs font-bold tracking-[0.4em] text-zinc-500">
+            YOUR NEXT LOOK STARTS HERE
           </p>
 
-          <h2 className="text-5xl font-bold md:text-7xl">
-            Your Style.
+          <h2 className="mt-6 text-6xl font-black leading-[0.9] md:text-8xl">
+            YOUR STYLE.
             <br />
-            <span className="font-light italic">
-              Your Rules.
-            </span>
+            <span className="font-light italic">YOUR RULES.</span>
           </h2>
 
-          <p className="mx-auto mt-8 max-w-xl text-lg text-slate-500">
-            Discover our latest collection and find pieces
-            that match your personality.
+          <p className="mx-auto mt-8 max-w-xl text-lg leading-8 text-zinc-500">
+            Discover premium men's fashion made to help you look
+            sharp and feel confident.
           </p>
 
           <Link
             to="/shop"
-            className="mt-10 inline-block rounded-full bg-black px-10 py-4 font-semibold text-white transition hover:scale-105"
+            className="mt-10 inline-block rounded-full bg-black px-10 py-5 font-bold text-white shadow-xl transition hover:-translate-y-1 hover:shadow-2xl dark:bg-white dark:text-black"
           >
             Explore Collection →
           </Link>
